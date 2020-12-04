@@ -16,7 +16,6 @@ buddy.c  buddy.h  buddy-test.c  buddy-unit-test.c  Makefile  malloc-test.c
 
 ./buddy-preload:
 buddy.c  buddy.h  Makefile  malloc-test.c
-[amit@kohinoor (master)]$ 
 ```
 
 First, you will be completing the buddy.c and buddy-unit-test.c files in the buddy-non-preload subfolder. Make sure to study the header file buddy.h for the javadocs of functions that you have to implement. Also study buddy.c for the header declaration and stubs of the functions. Then you will port the code over to the buddy-preload folder. The porting only involves changing some function prototypes.
