@@ -116,23 +116,22 @@ The README.md file should on the top-level of your project folder. Other than th
 
 Grade:  /150
 
-- Testing:
-  - [10 pts] Compiling:
+- [10 pts] Compiling:
   	- Each compiler warning will result in a 3 point deduction.
   	- You are not allowed to suppress warnings.
     
-  - [125 pts] Functional Requirements:
-                - buddy system (90 points):
-                        - Malloc and free 1 byte works (40):
-                        - Allocation beyond maximum fails gracefully (10):
-                        - Stability test - run buddy-test with at least 10M iterations without crashing (20):
-                        - Other unit or functional tests (20):
+- [125 pts] Functional Requirements:
+        - buddy system (90 points):
+            - Malloc and free 1 byte works (40):
+            - Allocation beyond maximum fails gracefully (10):
+            - Stability test - run buddy-test with at least 10M iterations without crashing (20):
+            - Other unit or functional tests (20):
 
-                - dash integration via interposing (35 points):
-                        - Mydash project (p1) works with buddy manager with interposing:
+        - dash integration via interposing (35 points):
+             - Mydash project (p1) works with buddy manager with interposing:
 
-                - buddy system performance (extra credit: +25 points):
-                - thread-safe buddy system (extra credit: +25 points):
+        - buddy system performance (extra credit: +25 points):
+        - thread-safe buddy system (extra credit: +25 points):
 
 - [15 pts] Documentation:
         - README file:
