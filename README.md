@@ -6,6 +6,7 @@ In this project we will implement  our own memory management.  More specifically
 ## Startup
 You should see the project folder with all the starter code. It should look like the listing below:
 
+```console
 [user@localhost (master)]$ ls -R
 .:
 buddy-non-preload  buddy-preload  buddy-system-movie.mpg  Buddy-System-notes.pdf  Makefile
@@ -16,6 +17,7 @@ buddy.c  buddy.h  buddy-test.c  buddy-unit-test.c  Makefile  malloc-test.c
 ./buddy-preload:
 buddy.c  buddy.h  Makefile  malloc-test.c
 [amit@kohinoor (master)]$ 
+```
 
 First, you will be completing the buddy.c and buddy-unit-test.c files in the buddy-non-preload subfolder. Make sure to study the header file buddy.h for the javadocs of functions that you have to implement. Also study buddy.c for the header declaration and stubs of the functions. Then you will port the code over to the buddy-preload folder. The porting only involves changing some function prototypes.
 
@@ -49,12 +51,15 @@ Interposing allows us to add our library in as a shim. Thus when malloc/free/rea
 
 Use the following command to interpose for malloc using libbuddy.so:
 
+```console
     LD_PRELOAD=./libbuddy.so ./mydash
+```
 
 Note that to time the interposed version, use the following command:
 
-
+```console
 time LD_PRELOAD=./libbuddy.so ./malloc-test <appropriate arguments>
+```
 
 ### Integrating with your shell
 
@@ -69,6 +74,7 @@ Now you can use preloading to test your buddy system with any program on your sy
 ### Buddy System Performance
 Test your buddy system implementation against malloc and make sure that it outperforms it. For the purposes of measuring performance, use the buddy-test.c and malloc-test.c code provided in the sample code for this project. Here is performance comparison for the reference solution (tested on onyx, compiled with -O2 optimizer flag)
 
+```console
 [user@onyx buddy-non-preload]$ time buddy-test 20000000 1234 s
 real    0m1.348s
 user    0m1.345s
@@ -78,6 +84,8 @@ sys     0m0.002s
 real    0m2.090s
 user    0m2.088s
 sys     0m0.001s
+```
+
 ### Thread Safety
 
 Make your buddy system library be thread-safe. Compare its run time performance against malloc and report in your README.md file.
@@ -108,29 +116,25 @@ The README.md file should on the top-level of your project folder. Other than th
 
 Grade:  /150
 
-Comments:
-
-=========================================================================
 - Testing:
   - [10 pts] Compiling:
   	- Each compiler warning will result in a 3 point deduction.
   	- You are not allowed to suppress warnings.
     
   - [125 pts] Functional Requirements:
-                -buddy system (90 points):
-                        -Malloc and free 1 byte works (40):
-                        -Allocation beyond maximum fails gracefully (10):
-                        -Stability test - run buddy-test with at least 10M iterations without crashing (20):
-                        -Other unit or functional tests (20):
+                - buddy system (90 points):
+                        - Malloc and free 1 byte works (40):
+                        - Allocation beyond maximum fails gracefully (10):
+                        - Stability test - run buddy-test with at least 10M iterations without crashing (20):
+                        - Other unit or functional tests (20):
 
-                -dash integration via interposing (35 points):
-                        -Mydash project (p1) works with buddy manager with interposing:
+                - dash integration via interposing (35 points):
+                        - Mydash project (p1) works with buddy manager with interposing:
 
-                -buddy system performance (extra credit: +25 points):
-                -thread-safe buddy system (extra credit: +25 points):
+                - buddy system performance (extra credit: +25 points):
+                - thread-safe buddy system (extra credit: +25 points):
 
 - [15 pts] Documentation:
-        README file:
-        Code organization & style:
-                Testing plan: Please describe in detail how you tested your program.
+        - README file:
+        - Testing plan: Please describe in detail how you tested your program.
 
