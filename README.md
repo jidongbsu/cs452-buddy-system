@@ -1,4 +1,4 @@
-# Memory Manager - CS453: Operating systems 
+# Memory Manager
 
 ## Overview
 
@@ -57,7 +57,7 @@ Interposing allows us to add our library in as a shim. Thus when malloc/free/rea
 Use the following command to interpose for malloc using libbuddy.so:
 
 ```console
-    LD_PRELOAD=./libbuddy.so ./mydash
+    LD_PRELOAD=./libbuddy.so ./mytests 1000000 1
 ```
 
 Note that to time the interposed version, use the following command:
@@ -66,11 +66,11 @@ Note that to time the interposed version, use the following command:
 time LD_PRELOAD=./libbuddy.so ./malloc-test <appropriate arguments>
 ```
 
-<!-- ### Integrating with your shell
+### Integrating with your mergesort
 
-Use the interposing version of your buddy system to integrate with the shell. Run all the base tests on your dash to check that it works well with the buddy memory allocator.-->
+Use the interposing version of your buddy system to integrate with your mergesort.
 
-### Integrating with other programs
+### Integrating with other programs (e.g., chrome or firefox)
 
 Now you can use preloading to test your buddy system with any program on your system!  Be warned though that this may not work as most programs are multi-threaded and your buddy system isn't (unless you do the extra credit). You would also need to initialize the buddy system to have more memory (8G or more). 
 
@@ -98,25 +98,24 @@ Make your buddy system library be thread-safe. Compare its run time performance 
 
 ## References
 
-Operating systems: three easy pieces: chapter 14: memory API
-Operating systems: three easy pieces: chapter 17: free space management
+Operating systems: three easy pieces: chapter 14: memory API<br/>
+Operating systems: three easy pieces: chapter 17: free space management<br/>
+Donald Knuth. Fundamental Algorithms. The Art of Computer Programming 1 (Second ed.) pp. 435-455.  Addison-Wesley. These pages are included in backpack as a PDF file. <br/>
+Look up Buddy Memory System on Wikipedia.
 
 ## Submission
 
-Create a private repository on github and give access permission to this account: jidongbsu (or using the email address: jidongxiao@boisestate.edu). You can use one repository for all 3 projects in this course, so that you only need to grant access permission to Jidong once.
-
-Due Date:  December 12th, 2019.
+Due Date:  December 9th, 2021. 10% of penalty for late submission within 48 hours; submissions will NOT be accepted after 48 hours window.
 
 ## Project Layout
 
-The top level of your submission directory for this project must have a Makefile that builds the both the preloaded and non-preloaded versions and other related text programs. The structure of the folder should be the same as what was given to you.
-
+The top level of your submission directory for this project must have a Makefile that builds both the preloaded and non-preloaded versions and other related text programs. The structure of the folder should be the same as what was given to you.
 
 Make sure to not modify the two test programs buddy-test.c and malloc-test.c.
 
-To test the buddy system library with the mydash project, you can simply copy your buddy system library to your p1 project and preload it to test it with your mydash project. This is how we will test your project. Make sure that your p1 project is up to date so that when you make a branch for this project, we will have the latest version of p1 project on it.
+To test the buddy system library with the mergesort project, you can simply copy your buddy system library to your mergesort project and preload it to test it with your mergesort project. This is how we will test your project.
 
-The README.md file should on the top-level of your project folder. Other than the usual stuff, it should clearly document what parts of this assignment you have attempted, and detail your how you have tested your program.
+The README.md file should on the top-level of your project folder. Other than the usual stuff, it should clearly document what parts of this assignment you have attempted, and detail how you have tested your program.
 
 ## Grading Rubric
 
@@ -134,8 +133,8 @@ Grade:  /150
 		- Stability test - run buddy-test with at least 10M iterations without crashing (20):
 		- Other unit or functional tests (20):
 
-	- dash integration via interposing (35 points):
-		- Mydash project (p1) works with buddy manager with interposing:
+	- mergesort integration via interposing (35 points):
+		- mergesort works with buddy manager with interposing
 
 	- buddy system performance (extra credit: +25 points):
 	- thread-safe buddy system (extra credit: +25 points):
