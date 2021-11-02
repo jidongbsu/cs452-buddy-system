@@ -1,9 +1,11 @@
 # Memory Manager - CS453: Operating systems 
 
 ## Overview
+
 In this project we will implement  our own memory management.  More specifically, we  will replace malloc/free with your own memory management scheme based on the Buddy system discussed in class. This project is challenging and you may not be able to get it to work fully. However, you will learn a lot about memory management along the way!
 
 ## Startup
+
 You should see the project folder with all the starter code. It should look like the listing below:
 
 ```console
@@ -23,6 +25,7 @@ First, you will be completing the buddy.c and buddy-unit-test.c files in the bud
 ## Specification
 
 ## Buddy System Memory Management
+
 Implement your own memory manager using the Buddy Algorithm. You should use the sbrk() to initially allocate a large block of memory.  A good initial amount is 512MB. From there on manage the chunk of memory returned by sbrk using your own memory management functions.
 
 Note that you will have to store the data structures used to represent the buddy system somewhere in memory. You may statically declare these pointers in you code (in the data segment). For this purpose you may assume that the maximum amount of memory that you will ever manage is limited to 32GB. The pointers associated with each free block in the buddy system should be stored in the block as explained in the Buddy system algorithm.
@@ -44,8 +47,11 @@ If the memory cannot be allocated, then your buddy_calloc or buddy_malloc functi
 Note that we have provided you with a buddy.h header file that contains all the declarations and prototypes. We have also provided a skeleton buddy.c that has the declaration for the pool and the table of lists for the buddy system.
 
 ## Testing
+
 Build a test suite for your buddy system. Sample test code that you can use as a starting point is in the buddy-non-preload folder. It contains two performance test files: buddy-test.c and malloc-test.c that run identical tests using the two different allocators. You should not modify these two files! In addition, there is a unit test file buddy-unit-test.c, to which you are required to add more tests.
-Interposing Malloc
+
+## Interposing Malloc
+
 Interposing allows us to add our library in as a shim. Thus when malloc/free/realloc/etc. are called our versions are called instead of the C standard library versions.  To use interposing, your buddy system allocator will need to implement the same interface as malloc (and with the same function names and signature).  We will make our buddy system into another shared library, which will be named libbuddy.so.
 
 Use the following command to interpose for malloc using libbuddy.so:
@@ -60,9 +66,9 @@ Note that to time the interposed version, use the following command:
 time LD_PRELOAD=./libbuddy.so ./malloc-test <appropriate arguments>
 ```
 
-### Integrating with your shell
+<!-- ### Integrating with your shell
 
-Use the interposing version of your buddy system to integrate with the shell. Run all the base tests on your dash to check that it works well with the buddy memory allocator.
+Use the interposing version of your buddy system to integrate with the shell. Run all the base tests on your dash to check that it works well with the buddy memory allocator.-->
 
 ### Integrating with other programs
 
@@ -71,6 +77,7 @@ Now you can use preloading to test your buddy system with any program on your sy
 ## Extra Credit 
 
 ### Buddy System Performance
+
 Test your buddy system implementation against malloc and make sure that it outperforms it. For the purposes of measuring performance, use the buddy-test.c and malloc-test.c code provided in the sample code for this project. Here is performance comparison for the reference solution (tested on onyx, compiled with -O2 optimizer flag)
 
 ```console
