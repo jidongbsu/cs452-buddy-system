@@ -50,7 +50,7 @@ Note that we have provided you with a buddy.h header file that contains all the 
 
 Build a test suite for your buddy system. Sample test code that you can use as a starting point is in the buddy-non-preload folder. It contains two performance test files: buddy-test.c and malloc-test.c that run identical tests using the two different allocators. You should not modify these two files! In addition, there is a unit test file buddy-unit-test.c, to which you are required to add more tests.
 
-## Interposing Malloc
+## Interposing malloc()
 
 Interposing allows us to add our library in as a shim. Thus when malloc/free/realloc/etc. are called our versions are called instead of the C standard library versions.  To use interposing, your buddy system allocator will need to implement the same interface as malloc (and with the same function names and signature).  We will make our buddy system into another shared library, which will be named libbuddy.so.
 
@@ -70,13 +70,11 @@ time LD_PRELOAD=./libbuddy.so ./malloc-test <appropriate arguments>
 
 Use the interposing version of your buddy system to integrate with your mergesort.
 
-### Integrating with other programs (e.g., chrome or firefox)
+### Integrating with your browser (Graduate Students only)
 
-Now you can use preloading to test your buddy system with any program on your system!  Be warned though that this may not work as most programs are multi-threaded and your buddy system isn't (unless you do the extra credit). You would also need to initialize the buddy system to have more memory (8G or more). 
+Now you can use preloading to test your buddy system with your browser (either chrome or firefox), keep in mind that browsers are multi-threaded programs. You would also need to initialize the buddy system to have more memory (8G or more).
 
-## Extra Credit 
-
-### Buddy System Performance
+### Buddy System Performance (Graduate Students only)
 
 Test your buddy system implementation against malloc and make sure that it outperforms it. For the purposes of measuring performance, use the buddy-test.c and malloc-test.c code provided in the sample code for this project. Here is performance comparison for the reference solution (tested on onyx, compiled with -O2 optimizer flag)
 
@@ -92,7 +90,7 @@ user    0m2.088s
 sys     0m0.001s
 ```
 
-### Thread Safety
+### Thread Safety (Graduate Students only)
 
 Make your buddy system library be thread-safe. Compare its run time performance against malloc and report in your README.md file.
 
@@ -117,7 +115,7 @@ To test the buddy system library with the mergesort project, you can simply copy
 
 The README.md file should on the top-level of your project folder. Other than the usual stuff, it should clearly document what parts of this assignment you have attempted, and detail how you have tested your program.
 
-## Grading Rubric
+## Grading Rubric (for Undergraduate Students)
 
 Grade:  /150
 
@@ -136,11 +134,37 @@ Grade:  /150
 	- mergesort integration via interposing (35 points):
 		- mergesort works with buddy manager with interposing
 
-	- buddy system performance (extra credit: +25 points):
-	- thread-safe buddy system (extra credit: +25 points):
-
 - [15 pts] Documentation:
 	
 	- README file:
 	- Testing plan: Please describe in detail how you tested your program.
 
+## Grading Rubric (for Graduate Students)
+
+Grade:  /150
+
+- [10 pts] Compiling:
+  	
+	- Each compiler warning will result in a 3 point deduction.
+	- You are not allowed to suppress warnings.
+    
+- [125 pts] Functional Requirements:
+	- buddy system (70 points):
+		- Malloc and free 1 byte works (40):
+		- Allocation beyond maximum fails gracefully (10):
+		- Stability test - run buddy-test with at least 10M iterations without crashing (10):
+		- Other unit or functional tests (10):
+
+	- mergesort integration via interposing (15 points):
+		- mergesort works with buddy manager with interposing
+
+        - browser integration via interposing (10 points):
+		- browser (either chrome or firefox) works with buddy manager with interposing (provide a screenshot please: on the left side of the screenshot, show your terminal; on the right side, show your browser)
+
+	- buddy system performance (15 points):
+	- thread-safe buddy system (15 points):
+
+- [15 pts] Documentation:
+	
+	- README file:
+	- Testing plan: Please describe in detail how you tested your program.
