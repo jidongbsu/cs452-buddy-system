@@ -158,7 +158,7 @@ Grade:  /150
 	- mergesort integration via interposing (15 points):
 		- mergesort works with buddy manager with interposing
 
-        - browser integration via interposing (10 points):
+	- browser integration via interposing (10 points):
 		- browser (either chrome or firefox) works with buddy manager with interposing (provide a screenshot please: on the left side of the screenshot, show your terminal; on the right side, show your browser)
 
 	- buddy system performance (15 points):
