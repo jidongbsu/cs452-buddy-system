@@ -15,7 +15,7 @@
 int verbosity = TERSE;
 
 
-static void printAndClear()
+static void printAndClear(void)
 {
 	printBuddyLists();
 	char ch = getchar();
@@ -25,7 +25,7 @@ static void printAndClear()
 }
 
 
-void simpleFreeTest()
+void simpleFreeTest(void)
 {
 	char *x;
 	
@@ -56,7 +56,7 @@ void simpleFreeTest()
 }
 
 
-void maxAllocationTest()
+void maxAllocationTest(void)
 {
 	void *ptr;
 	size_t count;
