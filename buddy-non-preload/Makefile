@@ -1,4 +1,3 @@
-
 CC=gcc
 CFLAGS=-g -O2 -std=gnu89 -Wall -Wpointer-arith -Wstrict-prototypes -MMD
 LIBFLAGS=-I. -shared -fPIC
@@ -17,11 +16,11 @@ libbuddy.a: $(LIBOBJS)
 	$(AR)  rcv $@ $(LIBOBJS)
 	ranlib $@
 
-buddy-unit-test: buddy-unit-test.o
-	$(CC) $(CFLAGS) -o $@ $? $(LIBS)
+buddy-unit-test: buddy-unit-test.o buddy.o
+	$(CC) $(CFLAGS) -o $@ $?
 
-buddy-test: buddy-test.o
-	$(CC) $(CFLAGS) -o $@ $? $(LIBS)
+buddy-test: buddy-test.o buddy.o
+	$(CC) $(CFLAGS) -o $@ $?
 
 malloc-test: malloc-test.o 
 	$(CC) $(CFLAGS) -o $@ $?
