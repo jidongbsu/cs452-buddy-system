@@ -98,7 +98,7 @@ Now you can use preloading to test your buddy system with your browser (either c
 
 Operating systems: three easy pieces: chapter 14: memory API<br/>
 Operating systems: three easy pieces: chapter 17: free space management<br/>
-Donald Knuth. Fundamental Algorithms. The Art of Computer Programming 1 (Second ed.) pp. 435-455.  Addison-Wesley. These pages are included in backpack as a PDF file. <br/>
+Donald Knuth. Fundamental Algorithms. The Art of Computer Programming 1 (Second ed.) pp. 435-455.  Addison-Wesley.<br/>
 Look up Buddy Memory System on Wikipedia.
 
 ## Submission
