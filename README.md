@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this assignment we will implement our own memory allocator. More specifically, we will replace malloc/free with your own memory management scheme based on the Buddy system discussed in class. Note this is NOT a kernel project, and you should just develop your code on onyx, not in your virtual machine.
+In this assignment we will implement our own memory allocator. More specifically, we will replace malloc/free with your own memory management scheme based on the Buddy system discussed in class. Note this is NOT a kernel project, and you should just develop your code on onyx, not in your virtual machine. Submissions fail to compile or run on onyx, will not be graded.
 
 ## Startup
 
