@@ -57,6 +57,6 @@ void free(void *ptr);
 /**
  * Prints out all the lists of available blocks in the Buddy system.
  */
-void printBuddyLists();
+void printBuddyLists(void);
 
 #endif /*BUDDY_H_*/

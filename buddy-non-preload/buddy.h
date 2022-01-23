@@ -18,7 +18,6 @@
  */
 int buddy_init(size_t);
 
-
 /**
  * Allocate dynamic memory. Rounds up the requested size to next power of two.
  * Returns a pointer that should be type casted as needed.
@@ -27,6 +26,14 @@ int buddy_init(size_t);
  */
 void *buddy_malloc(size_t size);
 
+/**
+ * buddy_free() frees the memory space pointed to by ptr, which must have been returned 
+ * by a previous call to buddy_malloc(), buddy_calloc() or buddy_realloc(). Otherwise, 
+ * or if buddy_free(ptr) has already been called before, undefined behaviour occurs. If 
+ * ptr is NULL, no operation is performed. 
+ * @param ptr Pointer to memory block to be freed
+ */
+void buddy_free(void *ptr);
 
 /**
  * Allocate and clear memory to all zeroes. Wrapper function that just calles buddy_malloc.
@@ -35,8 +42,7 @@ void *buddy_malloc(size_t size);
  * @param size   Size of each member
  * @return Pointer to start of the array of members
  */
-void *buddy_calloc(size_t nmemb, size_t size);
-
+// void *buddy_calloc(size_t nmemb, size_t size);
 
 /**
  * buddy_realloc() changes the size of the memory block pointed to by ptr to size bytes. 
@@ -50,18 +56,7 @@ void *buddy_calloc(size_t nmemb, size_t size);
  * @param  size The new size of the memory block
  * @return The pointer to the resized block
  */
-void *buddy_realloc(void *ptr, size_t size);
-
-
-/**
- * buddy_free() frees the memory space pointed to by ptr, which must have been returned 
- * by a previous call to buddy_malloc(), buddy_calloc() or buddy_realloc(). Otherwise, 
- * or if buddy_free(ptr) has already been called before, undefined behaviour occurs. If 
- * ptr is NULL, no operation is performed. 
- * @param ptr Pointer to memory block to be freed
- */
-void buddy_free(void *ptr);
-
+// void *buddy_realloc(void *ptr, size_t size);
 
 /**
  * Prints out all the lists of available blocks in the Buddy system.

@@ -72,7 +72,7 @@ void free(void *ptr)
 }
 
 
-void printBuddyLists()
+void printBuddyLists(void)
 {
 }
 

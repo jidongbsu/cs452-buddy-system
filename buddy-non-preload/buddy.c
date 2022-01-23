@@ -55,7 +55,12 @@ void *buddy_malloc(size_t size)
 	return NULL;
 }
 
+void buddy_free(void *ptr) 
+{
+}
 
+/* this semester we do not ask you to implement these two functions anymore.
+ * thus you can ignore them.
 void *buddy_calloc(size_t nmemb, size_t size) 
 {
 	return NULL;
@@ -64,15 +69,9 @@ void *buddy_calloc(size_t nmemb, size_t size)
 void *buddy_realloc(void *ptr, size_t size) 
 {
 	return NULL;
-}
+}*/
 
-
-void buddy_free(void *ptr) 
-{
-}
-
-
-void printBuddyLists()
+void printBuddyLists(void)
 {
 }
 
