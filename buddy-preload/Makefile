@@ -21,4 +21,4 @@ malloc-test: malloc-test.o
 	$(CC) $(CFLAGS) -o $@ $?
 
 clean:	
-	/bin/rm -f *.o a.out malloc-test libbuddy.* 
+	/bin/rm -f *.o *.d a.out malloc-test libbuddy.* 
