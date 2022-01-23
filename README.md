@@ -33,7 +33,7 @@ Implement your own memory manager using the Buddy Algorithm. You should use the 
 buddy\_init() does all the initialization, users are expected to call this function before use buddy\_malloc(). However, if the user doesn't call this buddy\_init(), then it should be transparently called whenever the user calls buddy\_malloc() for the first time. We will use the following prototypes for the buddy functions:
 
 ```c
-void buddy_init(size_t);
+int buddy_init(size_t);
 void *buddy_malloc(size_t);
 void buddy_free(void *);
 ```
