@@ -22,7 +22,7 @@ buddy.c  buddy.h  Makefile  malloc-test.c
 
 The buddy-preload folder will NOT be used this semester, thus you can ignore it.
 
-You will be completing the buddy.c and buddy-unit-test.c files in the buddy-non-preload subfolder. Make sure to study the header file buddy.h for the javadocs of functions that you have to implement. Also study buddy.c for the header declaration and stubs of the functions. <!-- Then you will port the code over to the buddy-preload folder. The porting only involves changing some function prototypes.-->
+You will be completing the buddy.c file in the buddy-non-preload subfolder. Make sure to study the header file buddy.h for the javadocs of functions that you have to implement. Also study buddy.c for the header declaration and stubs of the functions. <!-- Then you will port the code over to the buddy-preload folder. The porting only involves changing some function prototypes.-->
 
 ## Specification
 
@@ -40,14 +40,14 @@ void buddy_free(void *);
 
 Note that if a 0 is passed as an argument to buddy\_init, then it initializes the memory pool to be of the default size (512MB, as specified above). If the caller specifies an unreasonably small size, then the buddy system may not be able to satisfy any requests. 
 
-If the memory cannot be allocated, then your or buddy\_malloc function should set the errno to ENOMEM (which is defined in errno.h header file). 
+If the memory cannot be allocated, then your buddy\_malloc function should set the errno to ENOMEM (which is defined in errno.h header file). 
 
 Note that we have provided you with a buddy.h header file that contains all the declarations and prototypes. We have also provided a skeleton buddy.c that has the declaration for the pool and the table of lists for the buddy system.
 
 ## Testing
 
 <!-- Build a test suite for your buddy system. -->
-Sample test code that you can use as a starting point is in the buddy-non-preload folder. It contains two performance test files: buddy-test.c and malloc-test.c that run identical tests using the two different allocators. You should not modify these two files! In addition, there is a unit test file buddy-unit-test.c, to which you are recommended to add more tests.
+Sample test code that you can use as a starting point is in the buddy-non-preload folder. It contains two performance test files: buddy-test.c and malloc-test.c that run identical tests using the two different allocators - your allocator and the default malloc allocator. You should not modify these two files! In addition, there is a unit test file buddy-unit-test.c, to which you are recommended to add more tests.
 
 <!-- ## Interposing malloc()
 
@@ -121,7 +121,7 @@ Grade:  /100
 	- Malloc and free 1 byte works (40):
 	- Allocation beyond maximum fails gracefully (10):
 	- Stability test - run buddy-test with at least 10M iterations without crashing (25):
-	- Performance - your buddy system outperform the default malloc/free (5):
+	- Performance - your buddy system outperforms the default malloc/free (5):
 	<!-- - mergesort integration via interposing (35 points):
 		- serial mergesort works with buddy manager with interposing. -->
 - [10 pts] Documentation:
