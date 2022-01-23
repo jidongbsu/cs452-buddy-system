@@ -1,10 +1,13 @@
-# Memory Manager
-
 ## Overview
 
 In this assignment we will implement our own memory allocator. More specifically, we will replace malloc/free with your own memory management scheme based on the Buddy system discussed in class. Note this is NOT a kernel project, and you should just develop your code on onyx, not in your virtual machine. Submissions fail to compile or run on onyx, will not be graded.
 
-## Startup
+## Learning Objectives
+
+- Understand how free memory space is managed
+- Learn the buddy memory allocation algorithm
+
+## Starter Code
 
 You should see the project folder with all the starter code. It should look like the listing below:
 
