@@ -25,27 +25,86 @@ buddy.c  buddy.h  Makefile  malloc-test.c
 
 The buddy-preload folder will NOT be used this semester, thus you can ignore it.
 
-You will be completing the buddy.c file in the buddy-non-preload subfolder. Make sure to study the header file buddy.h for the javadocs of functions that you have to implement. Also study buddy.c for the header declaration and stubs of the functions. <!-- Then you will port the code over to the buddy-preload folder. The porting only involves changing some function prototypes.-->
+You will be completing the buddy.c file in the buddy-non-preload subfolder. You should not modify the buddy.h file.<!-- Then you will port the code over to the buddy-preload folder. The porting only involves changing some function prototypes.-->
 
 ## Specification
 
 ## Buddy System Memory Management
 
-Implement your own memory manager using the Buddy Algorithm. You should use the sbrk() to initially allocate a large block of memory. A good initial amount is 512MB. From there on manage the chunk of memory returned by sbrk using your own memory management functions. You may assume that the maximum amount of memory that you will ever manage is limited to 32GB.
+Implement your own memory manager using the Buddy Algorithm. You are required to implement the following 4 functions.
 
-buddy\_init() does all the initialization, users are expected to call this function before use buddy\_malloc(). However, if the user doesn't call this buddy\_init(), then it should be transparently called whenever the user calls buddy\_malloc() for the first time. We will use the following prototypes for the buddy functions:
+ - int buddy\_init(void): buddy\_init() does all the initialization. buddy\_init() does not take any parameters. It returns TRUE on success, and FALSE if it is a failure. Users are expected to call this function before use buddy\_malloc(). If they do not call buddy\_init() before calling buddy\_malloc(), your buddy\_malloc() can just return NULL.
+ - void\* buddy\_malloc(size\_t size): just like malloc(), your buddy\_malloc() function allocates size bytes and returns a pointer to the allocated memory. If the memory cannot be allocated, then your buddy\_malloc function should return NULL.
+ - void buddy\_free(void \*ptr); just like free(), your buddy\_free() function frees the memory space pointed to by ptr, which must have been returned by a previous call to buddy\_malloc(). Your buddy\_free() should not return anything.
+ - void printBuddyLists(void): this function is mainly for debugging purpose. Implementing this function will save your time in developing other functions. Example output of this printBuddyLists is displayed below:
 
-```c
-int buddy_init(size_t);
-void *buddy_malloc(size_t);
-void buddy_free(void *);
+```console
+List 0: head = 0x6020c0 --> head = 0x6020c0
+List 1: head = 0x6020d8 --> head = 0x6020d8
+List 2: head = 0x6020f0 --> head = 0x6020f0
+List 3: head = 0x602108 --> head = 0x602108
+List 4: head = 0x602120 --> head = 0x602120
+List 5: head = 0x602138 --> [tag=1,kval=5,addr=0x199e020] --> head = 0x602138
+List 6: head = 0x602150 --> [tag=1,kval=6,addr=0x199e040] --> head = 0x602150
+List 7: head = 0x602168 --> [tag=1,kval=7,addr=0x199e080] --> head = 0x602168
+List 8: head = 0x602180 --> [tag=1,kval=8,addr=0x199e100] --> head = 0x602180
+List 9: head = 0x602198 --> [tag=1,kval=9,addr=0x199e200] --> head = 0x602198
+List 10: head = 0x6021b0 --> [tag=1,kval=10,addr=0x199e400] --> head = 0x6021b0
+List 11: head = 0x6021c8 --> [tag=1,kval=11,addr=0x199e800] --> head = 0x6021c8
+List 12: head = 0x6021e0 --> [tag=1,kval=12,addr=0x199f000] --> head = 0x6021e0
+List 13: head = 0x6021f8 --> [tag=1,kval=13,addr=0x19a0000] --> head = 0x6021f8
+List 14: head = 0x602210 --> [tag=1,kval=14,addr=0x19a2000] --> head = 0x602210
+List 15: head = 0x602228 --> [tag=1,kval=15,addr=0x19a6000] --> head = 0x602228
+List 16: head = 0x602240 --> [tag=1,kval=16,addr=0x19ae000] --> head = 0x602240
+List 17: head = 0x602258 --> [tag=1,kval=17,addr=0x19be000] --> head = 0x602258
+List 18: head = 0x602270 --> [tag=1,kval=18,addr=0x19de000] --> head = 0x602270
+List 19: head = 0x602288 --> [tag=1,kval=19,addr=0x1a1e000] --> head = 0x602288
+List 20: head = 0x6022a0 --> [tag=1,kval=20,addr=0x1a9e000] --> head = 0x6022a0
+List 21: head = 0x6022b8 --> [tag=1,kval=21,addr=0x1b9e000] --> head = 0x6022b8
+List 22: head = 0x6022d0 --> [tag=1,kval=22,addr=0x1d9e000] --> head = 0x6022d0
+List 23: head = 0x6022e8 --> [tag=1,kval=23,addr=0x219e000] --> head = 0x6022e8
+List 24: head = 0x602300 --> [tag=1,kval=24,addr=0x299e000] --> head = 0x602300
+List 25: head = 0x602318 --> [tag=1,kval=25,addr=0x399e000] --> head = 0x602318
+List 26: head = 0x602330 --> [tag=1,kval=26,addr=0x599e000] --> head = 0x602330
+List 27: head = 0x602348 --> [tag=1,kval=27,addr=0x999e000] --> head = 0x602348
+List 28: head = 0x602360 --> [tag=1,kval=28,addr=0x1199e000] --> head = 0x602360
+List 29: head = 0x602378 --> head = 0x602378
+
+ Number of available blocks = 24
+
 ```
 
-Note that if a 0 is passed as an argument to buddy\_init, then it initializes the memory pool to be of the default size (512MB, as specified above). If the caller specifies an unreasonably small size, then the buddy system may not be able to satisfy any requests. 
+The meaning of these lists will be explained shortly in this next section.
 
-If the memory cannot be allocated, then your buddy\_malloc function should set the errno to ENOMEM (which is defined in errno.h header file). 
+## Global Variables
 
-Note that we have provided you with a buddy.h header file that contains all the declarations and prototypes. We have also provided a skeleton buddy.c that has the declaration for the pool and the table of lists for the buddy system.
+The starter code defines the following global variables.
+
+- *struct block_header avail[30]*; this is an global array which has 30 elements: avail[0] to avail[29]. Each element represents the head of a list. In theory you can implement this list in many different ways, in this assignment you are highly recommended to implement it as a circular doubly linked list. In total, you will have 30 such lists: List 0 to List 29 - the above printBuddyLists() prints these lists.
+
+- *const int max_kval*; *max_kval* represents the largest index of the above array, which is initialized as 29, and should not be changed.
+
+- *const size_t DEFAULT_MAX_MEM_SIZE*; this macro denotes the largest memory chunk you will get from sbrk() and will be the memory chunk you are going to manage. *DEFAULT_MAX_MEM_SIZE* is 512MB. In your buddy\_init(), you should use sbrk() as following:
+
+```c
+base=sbrk(DEFAULT_MAX_MEM_SIZE);
+```
+
+- *void* \**base*; *base* is a void type pointer which points to the starting address of the above memory chunk. In buddy.h, we initialized *base* as NULL.
+
+## APIs
+
+At some point, you will likely need to calculate the ceiling log base 2 of an integer, for that, you are recommended to use the following code:
+
+```c
+    size=size-1;
+    while(size>0){
+        size=size>>1;
+        lgsize++;
+    }
+```
+
+Given an integer *size*, the above code stores the ceiling log base 2 of *size* in *lgsize* - make sure your *lgsize* is initialized to be 0.
 
 ## Testing
 
@@ -108,7 +167,7 @@ Due Date:  02/15/2022, 23:59pm. Late submission will not be accepted/graded.
 
 ## Project Layout
 
-All files necessary for compilation need to be submitted, this includes source code files, header files, and Makefile. <!-- The Makefile in the top level of your submission directory for this project must build both the preloaded and non-preloaded versions and other related text programs. --> The structure of the submission folder should be the same as what was given to you. Make sure to not modify the two test programs buddy-test.c and malloc-test.c.
+All files necessary for compilation need to be submitted, this includes source code files, header files, and Makefile. <!-- The Makefile in the top level of your submission directory for this project must build both the preloaded and non-preloaded versions and other related text programs. --> The structure of the submission folder should be the same as what was given to you. Make sure to not modify the two test programs buddy-test.c and malloc-test.c, and not to modify buddy.h.
 
 <!-- To test the buddy system library with the mergesort project, you can simply copy your buddy system library to your mergesort project and preload it to test it with your mergesort project. This is how we will test your project.-->
 
