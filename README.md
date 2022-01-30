@@ -7,6 +7,12 @@ In this assignment we will implement our own memory allocator. More specifically
 - Understand how free memory space is managed
 - Learn the buddy memory allocation algorithm
 
+## References
+
+Operating Systems: Three Easy Pieces: [Chapter 14: Memory API](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-api.pdf)<br/>
+Operating Systems: Three Easy Pieces: [Chapter 17: Free Space Management](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-freespace.pdf)<br/>
+Donald Knuth. Fundamental Algorithms. The Art of Computer Programming 1 (Second ed.) pp. 435-455. Addison-Wesley.
+
 ## Starter Code
 
 You should see the project folder with all the starter code. It should look like the listing below:
@@ -36,7 +42,7 @@ Implement your own memory manager using the Buddy Algorithm. You are required to
  - int buddy\_init(void): buddy\_init() does all the initialization. buddy\_init() does not take any parameters. It returns TRUE on success, and FALSE if it is a failure. Users are expected to call this function before use buddy\_malloc(). If they do not call buddy\_init() before calling buddy\_malloc(), your buddy\_malloc() can just return NULL.
  - void\* buddy\_malloc(size\_t size): just like malloc(), your buddy\_malloc() function allocates size bytes and returns a pointer to the allocated memory. If the memory cannot be allocated, then your buddy\_malloc function should return NULL.
  - void buddy\_free(void \*ptr); just like free(), your buddy\_free() function frees the memory space pointed to by ptr, which must have been returned by a previous call to buddy\_malloc(). Your buddy\_free() should not return anything.
- - void printBuddyLists(void): this function is mainly for debugging purpose. Implementing this function will save your time in developing other functions. Example output of this printBuddyLists is displayed below:
+ - void printBuddyLists(void): this function is mainly for debugging purpose. Implementing this function will save your time in developing other functions. Example output of this printBuddyLists() is displayed below:
 
 ```console
 List 0: head = 0x6020c0 --> head = 0x6020c0
@@ -90,7 +96,7 @@ The starter code defines the following global variables.
 base=sbrk(DEFAULT_MAX_MEM_SIZE);
 ```
 
-- *void* \**base*; *base* is a void type pointer which points to the starting address of the above memory chunk. In buddy.h, we initialized *base* as NULL.
+- *void* \**base*; *base* is a void type pointer which points to the starting address of the above memory chunk. In buddy.h, we initialized *base* as NULL, but once you use the above sbrk() line, *base* will be pointing to the starting address of the allocated 512MB memory chunk.
 
 ## APIs
 
@@ -154,12 +160,6 @@ sys     0m0.001s
 <!-- ### Integrating with your browser (Graduate Students only)-->
 
 <!-- Now you can use preloading to test your buddy system with your browser (either chrome or firefox), keep in mind that browsers are multi-threaded programs. -->
-
-## References
-
-Operating Systems: Three Easy Pieces: [Chapter 14: Memory API](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-api.pdf)<br/>
-Operating Systems: Three Easy Pieces: [Chapter 17: Free Space Management](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-freespace.pdf)<br/>
-Donald Knuth. Fundamental Algorithms. The Art of Computer Programming 1 (Second ed.) pp. 435-455. Addison-Wesley.
 
 ## Submission
 
