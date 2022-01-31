@@ -21,18 +21,11 @@ Donald Knuth. Fundamental Algorithms. The Art of Computer Programming 1 (Second 
 The starter code looks like this:
 
 ```console
-[user@localhost (master)]$ ls -R
-.:
-buddy-non-preload  buddy-preload Makefile
-
-./buddy-non-preload:
-buddy.c  buddy.h  buddy-test.c  buddy-unit-test.c  Makefile  malloc-test.c
-
-./buddy-preload:
-buddy.c  buddy.h  Makefile  malloc-test.c
+(base) [@onyx cs452-buddy-system]$ ls
+buddy.c  buddy.h  buddy-test.c  buddy-unit-test.c  Makefile  malloc-test.c  README.md
 ```
 
-The buddy-preload folder will NOT be used this semester, thus you can ignore it. You will be completing the buddy.c file in the buddy-non-preload subfolder. You should not modify the buddy.h file.<!-- Then you will port the code over to the buddy-preload folder. The porting only involves changing some function prototypes.-->
+You will be completing the buddy.c file. You should not modify the buddy.h file.<!-- Then you will port the code over to the buddy-preload folder. The porting only involves changing some function prototypes.-->
 
 ## Specification
 
@@ -141,14 +134,13 @@ Given an integer *size*, the above code stores the ceiling log base 2 of *size* 
 
 ## Testing
 
-<!-- Build a test suite for your buddy system. -->
-Sample test code that you can use as a starting point is in the buddy-non-preload folder. It contains two performance test files: buddy-test.c and malloc-test.c that run identical tests using the two different allocators - your allocator and the default malloc allocator. You should not modify these two files! In addition, there is a unit test file buddy-unit-test.c, to which you are recommended to add more tests.
+Two performance test files are provided: buddy-test.c and malloc-test.c. They run identical tests using the two different allocators - your allocator and the default malloc allocator. You should not modify these two files! In addition, there is a unit test file buddy-unit-test.c, to which you are recommended to add more tests.
 
 This is how you should run the buddy-unit-test program:
 
 ```console
-(base) [@onyx buddy-non-preload]$ ./buddy-unit-test s
-(base) [@onyx buddy-non-preload]$ ./buddy-unit-test v
+(base) [@onyx ]$ ./buddy-unit-test s
+(base) [@onyx ]$ ./buddy-unit-test v
 ```
 
 *s* stands for silent, *v* stands for verbose. Thus *v* shows you more debugging information.
@@ -156,10 +148,10 @@ This is how you should run the buddy-unit-test program:
 This is how you should run the buddy-test or malloc-test program:
 
 ```console
-(base) [@onyx buddy-non-preload]$ ./buddy-test 100 1234 s
-(base) [@onyx buddy-non-preload]$ ./buddy-test 100 1234 v
-(base) [@onyx buddy-non-preload]$ ./malloc-test 100 1234 s
-(base) [@onyx buddy-non-preload]$ ./malloc-test 100 1234 v
+(base) [@onyx ]$ ./buddy-test 100 1234 s
+(base) [@onyx ]$ ./buddy-test 100 1234 v
+(base) [@onyx ]$ ./malloc-test 100 1234 s
+(base) [@onyx ]$ ./malloc-test 100 1234 v
 ```
 
 Once again, *s* stands for silent, *v* stands for verbose. *1234* is a random seed, you can use any number for the random seed. 100 means you want to run 100 iterations, each iteration will try to allocate or free some random memory blocks from your buddy memory allocator. Thus, a large number of iterations will test your buddy system more thoroughly. That is why the grading rubric says, we expect to run buddy-test against your buddy system with at least 10M iterations without crashing.
@@ -189,12 +181,12 @@ Use the interposing version of your buddy system to integrate with your mergesor
 Test your buddy system implementation against malloc and make sure that it outperforms it. For the purposes of measuring performance, use the buddy-test.c and malloc-test.c code provided in the sample code for this project. Here is performance comparison for the reference solution (tested on onyx, compiled with -O2 optimizer flag)
 
 ```console
-[user@onyx buddy-non-preload]$ time buddy-test 20000000 1234 s
+[user@onyx ]$ time buddy-test 20000000 1234 s
 real    0m1.348s
 user    0m1.345s
 sys     0m0.002s
 
-[user@onyx buddy-non-preload]$ time malloc-test 20000000 1234 s      
+[user@onyx ]$ time malloc-test 20000000 1234 s      
 real    0m2.090s
 user    0m2.088s
 sys     0m0.001s
