@@ -12,7 +12,6 @@
 
 int verbosity = TERSE;
 
-
 struct element {
 	char *ptr;
 	size_t size;
