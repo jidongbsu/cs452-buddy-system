@@ -22,7 +22,7 @@ The starter code looks like this:
 
 ```console
 (base) [@onyx cs452-buddy-system]$ ls
-buddy.c  buddy.h  buddy-test.c  buddy-unit-test.c  Makefile  malloc-test.c  README.md
+buddy.c  buddy.h  buddy-test.c  buddy-unit-test.c  Makefile  malloc-test.c  README.md  README.template
 ```
 
 You will be completing the buddy.c file. You should not modify the buddy.h file.<!-- Then you will port the code over to the buddy-preload folder. The porting only involves changing some function prototypes.-->
