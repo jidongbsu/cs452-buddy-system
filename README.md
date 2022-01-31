@@ -146,6 +146,27 @@ Given an integer *size*, the above code stores the ceiling log base 2 of *size* 
 <!-- Build a test suite for your buddy system. -->
 Sample test code that you can use as a starting point is in the buddy-non-preload folder. It contains two performance test files: buddy-test.c and malloc-test.c that run identical tests using the two different allocators - your allocator and the default malloc allocator. You should not modify these two files! In addition, there is a unit test file buddy-unit-test.c, to which you are recommended to add more tests.
 
+This is how you should run the buddy-unit-test program:
+
+```console
+(base) [@onyx buddy-non-preload]$ ./buddy-unit-test s
+
+(base) [@onyx buddy-non-preload]$ ./buddy-unit-test v
+```
+
+*s* stands for silent, *v* stands for verbose. Thus *v* shows you more debugging information.
+
+This is how you should run the buddy-test or malloc-test program:
+
+```console
+(base) [@onyx buddy-non-preload]$ ./buddy-test 100 1234 s
+(base) [@onyx buddy-non-preload]$ ./buddy-test 100 1234 v
+(base) [@onyx buddy-non-preload]$ ./malloc--test 100 1234 s
+(base) [@onyx buddy-non-preload]$ ./malloc--test 100 1234 v
+```
+
+Once again, *s* stands for silent, *v* stands for verbose. *1234* is a random seed, you can use any number for the random seed. 100 means you want to run 100 iterations, each iteration will try to allocate or free some random memory blocks from your buddy memory allocator. Thus, a large number of iterations will test your buddy system more thoroughly. That is why the grading rubric says, we expect to run buddy-test against your buddy system with at least 10M iterations without crashing.
+
 <!-- ## Interposing malloc()
 
 Interposing allows us to add our library in as a shim. Thus when malloc/free are called our versions are called instead of the C standard library versions. To use interposing, your buddy system allocator will need to implement the same interface as malloc (and with the same function names and signature).  We will make our buddy system into another shared library, which will be named libbuddy.so.
