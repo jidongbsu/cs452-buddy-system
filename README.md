@@ -4,8 +4,8 @@ In this assignment we will implement our own memory allocator. More specifically
 
 ## Learning Objectives
 
-- Understand how free memory space is managed
-- Learn the buddy memory allocation algorithm
+- Understand how free memory space is managed.
+- Learn the buddy memory allocation algorithm.
 
 ## Note
 
