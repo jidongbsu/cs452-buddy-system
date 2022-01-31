@@ -42,7 +42,7 @@ Implement your own memory manager using the Buddy Algorithm. You are required to
 
  - int buddy\_init(void): buddy\_init() does all the initialization. buddy\_init() does not take any parameters. It returns TRUE on success, and FALSE if it is a failure. Users are expected to call this function before use buddy\_malloc(). If they do not call buddy\_init() before calling buddy\_malloc(), your buddy\_malloc() can just return NULL.
  - void\* buddy\_malloc(size\_t size): just like malloc(), your buddy\_malloc() function allocates **size** bytes and returns a pointer to the allocated memory. If the memory cannot be allocated, then your buddy\_malloc function should return NULL.
- - void buddy\_free(void \*ptr); just like free(), your buddy\_free() function frees the memory space pointed to by **ptr**, which must have been returned by a previous call to buddy\_malloc(). Your buddy\_free() should not return anything.
+ - void buddy\_free(void \*ptr); just like free(), your buddy\_free() function frees the memory space pointed to by **ptr**, which must have been returned by a previous call to buddy\_malloc(). Your buddy\_free() should not return anything. However, if ptr is NULL, then just return.
  - void printBuddyLists(void): this function is mainly for debugging purpose. Implementing this function will save your time in developing other functions. Example output of this printBuddyLists() is displayed below:
 
 ```console

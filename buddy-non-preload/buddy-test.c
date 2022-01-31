@@ -1,9 +1,6 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "buddy.h"
-
 
 #define MAX_REQUEST 4096
 #define MAX_ITEMS 100
@@ -13,14 +10,17 @@
 #define VERBOSE  2
 #define INTERACTIVE 3
 
-int verbosity = TERSE;
+int buddy_init(void);
+void *buddy_malloc(size_t size);
+void buddy_free(void *ptr);
+void printBuddyLists(void);
 
+int verbosity = TERSE;
 
 struct element {
 	char *ptr;
 	size_t size;
 };
-
 
 int main(int argc, char *argv[])
 {
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 	if (verbosity > TERSE)
 		system("clear");
 
-	buddy_init(0);	
+	buddy_init();	
 	if (verbosity > TERSE) {
 		printf("Buddy system lists after initialization.\n");
 		printBuddyLists();
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 		if (x[loc].ptr) {
 			buddy_free(x[loc].ptr);
 			if (verbosity > SILENT) 
-				printf("buddy_freed address %p of size %lu  in x[%d]\n", x[loc].ptr, x[loc].size, loc);
+				printf("buddy_freed address %p of size %lu in x[%d]\n", x[loc].ptr, x[loc].size, loc);
 			if (verbosity > TERSE) printBuddyLists();
 			x[loc].ptr = NULL;
 			x[loc].size = 0;
@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 			size = random() % MAX_REQUEST + 1; // how big a request
 			x[loc].ptr = (char *) buddy_malloc(size*sizeof(char));
 			if (x[loc].ptr == NULL) {
-				perror("TestBuddy:");
+				printf("buddy_malloc failed\n:");
 				exit(1);
 			}
 			x[loc].size = size*sizeof(char);

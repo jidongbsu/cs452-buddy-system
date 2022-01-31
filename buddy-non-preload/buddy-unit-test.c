@@ -1,8 +1,5 @@
-
 #include <stdio.h>
 #include <stdlib.h>
-#include "buddy.h"
-
 
 #define MAX_REQUEST 4096
 #define MAX_ITEMS 100
@@ -12,8 +9,12 @@
 #define VERBOSE  2
 #define INTERACTIVE 3
 
-int verbosity = TERSE;
+int buddy_init(void);
+void *buddy_malloc(size_t size);
+void buddy_free(void *ptr);
+void printBuddyLists(void);
 
+int verbosity = TERSE;
 
 static void printAndClear(void)
 {
@@ -23,7 +24,6 @@ static void printAndClear(void)
 	if (ch == 'q')
 		exit(0);
 }
-
 
 void simpleFreeTest(void)
 {
@@ -66,9 +66,8 @@ void maxAllocationTest(void)
 	for (;;) {
 		ptr = buddy_malloc(count);
 		if (ptr == NULL) {
-			perror("TestBuddy");
 			if (verbosity > 0) 
-				printf("ERROR! buddy_malloc'd failed to allocate a block of size %lu\n", count);
+				printf("ERROR! buddy_malloc failed to allocate a block of size %lu\n", count);
 			if (verbosity > 1) printAndClear();
 			return;
 		} else {
@@ -101,7 +100,7 @@ int main(int argc, char *argv[])
 	 
 	system("clear");
 
-	buddy_init(0);	
+	buddy_init();	
 	if (verbosity > 0) {
 		printf("Buddy system initialized.\n");
 	}

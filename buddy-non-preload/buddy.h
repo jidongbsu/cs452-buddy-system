@@ -1,22 +1,43 @@
 #ifndef BUDDY_H_
 #define BUDDY_H_
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <unistd.h>
-#include <string.h>
+#include <stdio.h>	/* for printf() */
+#include <unistd.h>	/* for sbrk() */
 
 #define TRUE 1
 #define FALSE 0
 
+/* the header for an available block */
+struct block_header {
+    short tag;
+    short kval;
+    struct block_header *next;
+    struct block_header *prev;
+};
+
+const int RESERVED = 0;
+const int FREE = 1;
+const int UNUSED = -1; /* useful for header nodes */
+
+/* supports memory allocation of up to 2^(max_kval-1) in size */
+const int max_kval = 29;
+
+/* the table of pointers to the buddy system lists */
+struct block_header avail[30];
+
+/* default memory allocation is 512MB, in this program,
+ * we ask 512MB from sbrk(), but we allow applications to allocate
+ * at most 256MB, because we need extra space to store the header. */
+const size_t DEFAULT_MAX_MEM_SIZE = 512*1024*1024;
+
+void *base = NULL; // pointer to the start of the memory pool
+
 /**
- * Initialize the buddy system to the given size 
- * (rounded up to the next power of two)
+ * Initialize the buddy system to the default size 
  *
- * @return  TRUE if successful, ENOMEM otherwise.
+ * @return  TRUE if successful, FALSE otherwise.
  */
-int buddy_init(size_t);
+int buddy_init(void);
 
 /**
  * Allocate dynamic memory. Rounds up the requested size to next power of two.
@@ -34,29 +55,6 @@ void *buddy_malloc(size_t size);
  * @param ptr Pointer to memory block to be freed
  */
 void buddy_free(void *ptr);
-
-/**
- * Allocate and clear memory to all zeroes. Wrapper function that just calles buddy_malloc.
- *
- * @param nmemb  The number of members needed
- * @param size   Size of each member
- * @return Pointer to start of the array of members
- */
-// void *buddy_calloc(size_t nmemb, size_t size);
-
-/**
- * buddy_realloc() changes the size of the memory block pointed to by ptr to size bytes. 
- * The contents will be unchanged to the minimum of the old and new sizes; newly 
- * allocated memory will be uninitialized. If ptr is NULL, the call is equivalent 
- * to buddy_malloc(size); if size is equal to zero, the call is equivalent to buddy_free(ptr). 
- * Unless ptr is NULL, it must have been returned by an earlier call to buddy_malloc(), 
- * buddy_calloc() or buddy_realloc().
- *
- * @param  ptr Pointer to existing memory block
- * @param  size The new size of the memory block
- * @return The pointer to the resized block
- */
-// void *buddy_realloc(void *ptr, size_t size);
 
 /**
  * Prints out all the lists of available blocks in the Buddy system.
