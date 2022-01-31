@@ -36,9 +36,7 @@ The buddy-preload folder will NOT be used this semester, thus you can ignore it.
 
 ## Specification
 
-## Buddy System Memory Management
-
-Implement your own memory manager using the Buddy Algorithm. You are required to implement the following 4 functions.
+You are required to implement the following 4 functions.
 
  - int buddy\_init(void): buddy\_init() does all the initialization. buddy\_init() does not take any parameters. It returns TRUE on success, and FALSE if it is a failure. Users are expected to call this function before use buddy\_malloc(). If they do not call buddy\_init() before calling buddy\_malloc(), your buddy\_malloc() can just return NULL.
  - void\* buddy\_malloc(size\_t size): just like malloc(), your buddy\_malloc() function allocates **size** bytes and returns a pointer to the allocated memory. If the memory cannot be allocated, then your buddy\_malloc function should return NULL.
@@ -87,7 +85,7 @@ The meaning of these lists will be explained shortly in this next section.
 
 The starter code defines the following global data structures and variables, in buddy.h. Once again, do not modify buddy.h.
 
-- *struct block_header avail[30]*; this is a global array which has 30 elements: avail[0] to avail[29]. Each element represents the head of a list. In theory you can implement this list in many different ways, in this assignment you are highly recommended to implement it as a circular doubly linked list. In total, you will have 30 such lists: List 0 to List 29 - the above printBuddyLists() prints these lists.
+- *struct block_header avail[30]*; this is a global array which has 30 elements: avail[0] to avail[29]. Each element represents the head of a list. In theory you can implement this list in many different ways, in this assignment you are highly recommended to implement it as a circular doubly linked list. In total, you will have 30 such lists: List 0 to List 29 - the above printBuddyLists() prints these lists. All 30 lists should be initialized in your buddy\_init() function.
 
 - *struct block_header*. This is the basic data structure which represents the header of one memory block.
 
@@ -150,7 +148,6 @@ This is how you should run the buddy-unit-test program:
 
 ```console
 (base) [@onyx buddy-non-preload]$ ./buddy-unit-test s
-
 (base) [@onyx buddy-non-preload]$ ./buddy-unit-test v
 ```
 
@@ -161,8 +158,8 @@ This is how you should run the buddy-test or malloc-test program:
 ```console
 (base) [@onyx buddy-non-preload]$ ./buddy-test 100 1234 s
 (base) [@onyx buddy-non-preload]$ ./buddy-test 100 1234 v
-(base) [@onyx buddy-non-preload]$ ./malloc--test 100 1234 s
-(base) [@onyx buddy-non-preload]$ ./malloc--test 100 1234 v
+(base) [@onyx buddy-non-preload]$ ./malloc-test 100 1234 s
+(base) [@onyx buddy-non-preload]$ ./malloc-test 100 1234 v
 ```
 
 Once again, *s* stands for silent, *v* stands for verbose. *1234* is a random seed, you can use any number for the random seed. 100 means you want to run 100 iterations, each iteration will try to allocate or free some random memory blocks from your buddy memory allocator. Thus, a large number of iterations will test your buddy system more thoroughly. That is why the grading rubric says, we expect to run buddy-test against your buddy system with at least 10M iterations without crashing.
