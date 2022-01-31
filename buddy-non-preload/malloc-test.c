@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,7 +17,6 @@ struct element {
 	char *ptr;
 	size_t size;
 };
-
 
 int main(int argc, char *argv[])
 {
@@ -99,4 +97,3 @@ int main(int argc, char *argv[])
     }
 	exit(0);	
 }
-
