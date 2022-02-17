@@ -94,7 +94,7 @@ struct block_header {
 
 The above 30 lists do not connect memory blocks, rather, they connect headers - headers representing the head of memory blocks. Reading the book chapter will help you understand the meaning of headers and why we need headers, but the textbook chapter does not describe how exactly we can implement the buddy system. In our implementation, we define 30 circular doubly linked lists: list 0 connects block headers, and each header represents a memory block whose size is 2^0=1 byte, and we say its **kval** is 0; list 1 connects block headers, and each header represents a memory block whose size is 2^1=2 byte, and we say its **kval** is 1; list 2 connects block headers, and each header represents a memory block whose size is 2^2=4 bytes, and we say its **kval** is 2; ...; list 29 connects block headers, and each header represents a memory block whose size is 2^29=512MB, and we say its **kval** is 29.
 
-In your printBuddyLists(), you should try to print out all your 30 lists. The *addr* in the example output of the above printBuddyLists(), means the address pointed to by your node's *next* pointer.
+In your printBuddyLists(), you should try to print out all your 30 lists. The *addr* in the example output of the above printBuddyLists(), means the address of each node.
 
 - In *struct block_header*, there is a field called *tag*. We use this tag to represent the status of memory block. 3 tags are defined:
 
