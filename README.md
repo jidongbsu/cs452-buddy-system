@@ -131,10 +131,10 @@ In addition, at some point, you will need to calculate the ceiling log base 2 of
 
 Given an integer *size*, the above code stores the ceiling log base 2 of *size* in *lgsize* - make sure your *lgsize* is initialized to be 0.
 
-As the chapter says:**The reason buddy allocation works so well is that it is simple to determine the buddy of a particular block. How, you ask? Think about the addresses of the blocks in the free space above. If you think carefully enough, you’ll see that the address of each buddy pair only differs by a single bit; which bit is determined by the level in the buddy tree.** It's true, there is only one single bit of difference between a memory block's **relative** address and its buddy's **relative** address. Thus in your code, you can use the following formula to compute your buddy's (**relative**) memory address.
+As the chapter says: **The reason buddy allocation works so well is that it is simple to determine the buddy of a particular block. How, you ask? Think about the addresses of the blocks in the free space above. If you think carefully enough, you’ll see that the address of each buddy pair only differs by a single bit; which bit is determined by the level in the buddy tree.** It's true, there is only one single bit of difference between a memory block's **relative** address and its buddy's **relative** address. Thus in your code, you can use the following formula to compute your buddy's (**relative**) memory address.
 
 ```c
-your_buddy_address = your_address^(1ULL<<lgsize))
+your_buddy_address = your_address^(1ULL<<lgsize));
 ```
 
 This formula basically uses the bit-wise XOR operation to flip one single bit of your address, so as to get your buddy's address. Note, we are talking about relative addresses only; not absolute addresses.
