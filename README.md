@@ -195,10 +195,10 @@ Grade:  /100
 	- Each compiler warning will result in a 3 point deduction.
 	- You are not allowed to suppress warnings.
 - [80 pts] Functional Requirements:
-	- Malloc and free 1 byte works (40):
-	- Allocation beyond maximum fails gracefully (10):
-	- Stability test - run buddy-test with at least 10M iterations without crashing (25):
-	- Performance - your buddy system outperforms the default malloc/free (5):
+	- Malloc and free 1 byte works (this will be reported by buddy-unit-test) (40):
+	- Allocation beyond maximum fails gracefully (this will be reported by buddy-unit-test) (10):
+	- Stability test - run buddy-test with at least 10M iterations without crashing (this will be reported by buddy-test) (25):
+	- Performance - your buddy system outperforms the default malloc/free (this will be reported by buddy-test and malloc-test) (5):
 - [10 pts] Documentation:
 	- README.md file (rename this current README file to README.orig and rename the README.template to README.md)
 	- You are required to fill in every section of the README template, missing 1 section will result in a 2-point deduction.
