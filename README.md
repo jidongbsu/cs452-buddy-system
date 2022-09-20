@@ -137,7 +137,7 @@ As the chapter says: **The reason buddy allocation works so well is that it is s
 your_buddy_address = your_address^(1ULL<<lgsize));
 ```
 
-This formula basically uses the bit-wise XOR operation to flip one single bit of your address, so as to get your buddy's address. Note, we are talking about relative addresses only; not absolute addresses. If your buddy calculation is correct, you should see that the distance between your address and your buddy's address is a power of 2, and you can use the following 4 lines to show the distance between two pointers *p* and *p2 - assuming *p* is larger than *p2*:
+This formula basically uses the bit-wise XOR operation to flip one single bit of your address, so as to get your buddy's address. Note, we are talking about relative addresses only; not absolute addresses. If your buddy calculation is correct, you should see that the distance between your address and your buddy's address is a power of 2, and you can use the following 4 lines to show the distance between two pointers *p* and *p2* - assuming *p* is larger than *p2*:
 
 ```c
 #include <stddef.h> /* for ptrdiff_t */
