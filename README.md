@@ -137,7 +137,43 @@ As the chapter says: **The reason buddy allocation works so well is that it is s
 your_buddy_address = your_address^(1ULL<<lgsize));
 ```
 
-This formula basically uses the bit-wise XOR operation to flip one single bit of your address, so as to get your buddy's address. Note, we are talking about relative addresses only; not absolute addresses.
+This formula basically uses the bit-wise XOR operation to flip one single bit of your address, so as to get your buddy's address. Note, we are talking about relative addresses only; not absolute addresses. If your buddy calculation is correct, you should see that the distance between your address and your buddy's address is a power of 2, and you can use the following 4 lines to show the distance between two pointers *p* and *p2 - assuming *p* is larger than *p2*:
+
+```c
+#include <stddef.h> /* for ptrdiff_t */
+ptrdiff_t distance_bytes;
+distance_bytes=(char *)p-(char *)p2;				
+printf("when splitting, the distance between p2 and its buddy (buddy on the right) is %td\n", distance_bytes);
+```
+
+Some sample output is like this:
+
+```console
+when splitting, the distance between p2 and its buddy (buddy on the right) is 268435456
+when splitting, the distance between p2 and its buddy (buddy on the right) is 134217728
+when splitting, the distance between p2 and its buddy (buddy on the right) is 67108864
+when splitting, the distance between p2 and its buddy (buddy on the right) is 33554432
+when splitting, the distance between p2 and its buddy (buddy on the right) is 16777216
+when splitting, the distance between p2 and its buddy (buddy on the right) is 8388608
+when splitting, the distance between p2 and its buddy (buddy on the right) is 4194304
+when splitting, the distance between p2 and its buddy (buddy on the right) is 2097152
+when splitting, the distance between p2 and its buddy (buddy on the right) is 1048576
+when splitting, the distance between p2 and its buddy (buddy on the right) is 524288
+when splitting, the distance between p2 and its buddy (buddy on the right) is 262144
+when splitting, the distance between p2 and its buddy (buddy on the right) is 131072
+when splitting, the distance between p2 and its buddy (buddy on the right) is 65536
+when splitting, the distance between p2 and its buddy (buddy on the right) is 32768
+when splitting, the distance between p2 and its buddy (buddy on the right) is 16384
+when splitting, the distance between p2 and its buddy (buddy on the right) is 8192
+when splitting, the distance between p2 and its buddy (buddy on the right) is 4096
+when splitting, the distance between p2 and its buddy (buddy on the right) is 2048
+when splitting, the distance between p2 and its buddy (buddy on the right) is 1024
+when splitting, the distance between p2 and its buddy (buddy on the right) is 512
+when splitting, the distance between p2 and its buddy (buddy on the right) is 256
+when splitting, the distance between p2 and its buddy (buddy on the right) is 128
+when splitting, the distance between p2 and its buddy (buddy on the right) is 64
+when splitting, the distance between p2 and its buddy (buddy on the right) is 32
+```
 
 ## Testing
 
