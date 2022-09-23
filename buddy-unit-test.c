@@ -37,7 +37,7 @@ void simpleFreeTest(void)
 		exit(1);
 	}
 	if (verbosity > 0) {
-		printf("Buddy system succeeding in allocating 1 byte. \n");
+		printf("Buddy system succeeding in allocating 1 byte.\n");
 	}
 	if (verbosity > 1) {
 		printf("Buddy system lists after malloc'ing 1 byte.\n");
@@ -47,14 +47,67 @@ void simpleFreeTest(void)
 	// buddy_free should make all the blocks merge back into one block
 	buddy_free(x);
 	if (verbosity > 0) {
-		printf("Buddy system succeeding in free'ing 1 byte. \n");
+		printf("Buddy system succeeding in free'ing 1 byte.\n");
 	}
 	if (verbosity > 1) {
-		printf("Buddy system lists after free'ing the block .\n");
+		printf("Buddy system lists after free'ing the 1 byte.\n");
 		printAndClear();
 	}
 }
 
+void notsimpleFreeTest(void)
+{
+        char *x;
+        char *y;
+
+        // buddy_malloc one byte
+        x = (char *) buddy_malloc(sizeof(char));
+        if (x == NULL) {
+                fprintf(stderr,"ERROR! Buddy system failed to allocate 1 byte.\n");
+                exit(1);
+        }
+        if (verbosity > 0) {
+                printf("Buddy system succeeding in allocating 1 byte.\n");
+        }
+        if (verbosity > 1) {
+                printf("Buddy system lists after malloc'ing 1 byte.\n");
+                printAndClear();
+        }
+
+        // buddy_malloc two bytes
+        y = (char *) buddy_malloc(2 * sizeof(char));
+        if (y == NULL) {
+                fprintf(stderr,"ERROR! Buddy system failed to allocate 2 bytes.\n");
+                exit(1);
+        }
+        if (verbosity > 0) {
+                printf("Buddy system succeeding in allocating 2 bytes.\n");
+        }
+        if (verbosity > 1) {
+                printf("Buddy system lists after malloc'ing 2 bytes.\n");
+                printAndClear();
+        }
+
+	/* free the one byte */
+        buddy_free(x);
+        if (verbosity > 0) {
+                printf("Buddy system succeeding in free'ing 1 byte.\n");
+        }
+        if (verbosity > 1) {
+                printf("Buddy system lists after free'ing 1 byte.\n");
+                printAndClear();
+        }
+
+	/* free the two bytes */
+        buddy_free(y);
+        if (verbosity > 0) {
+                printf("Buddy system succeeding in free'ing 2 bytes.\n");
+        }
+        if (verbosity > 1) {
+                printf("Buddy system lists after free'ing 2 bytes.\n");
+                printAndClear();
+        }
+}
 
 void maxAllocationTest(void)
 {
@@ -78,8 +131,6 @@ void maxAllocationTest(void)
 		count = count * 10;
 	}	
 }
-
-
 
 int main(int argc, char *argv[])
 {
@@ -110,6 +161,8 @@ int main(int argc, char *argv[])
 	}
 	
 	simpleFreeTest();
+
+	notsimpleFreeTest();
 	
 	maxAllocationTest();
 	
